@@ -1,0 +1,8 @@
+# Sistema
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Videos originales sin comprimir (no subir: pesan mucho)
+*-original.mp4
+*.mov
