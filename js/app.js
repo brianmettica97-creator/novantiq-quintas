@@ -1093,6 +1093,7 @@
     'quinta-berazategui': [
       { src: 'video/berazategui.mp4', poster: 'video/berazategui-poster.jpg', t: 'Recorrido por la quinta' },
     ],
+    'quinta-areco': [{ src: 'video/areco.mp4', poster: 'video/areco-poster.jpg', t: 'La pileta' }],
   };
   const vidEl = $('#vid');
   let vidIdx = 0,

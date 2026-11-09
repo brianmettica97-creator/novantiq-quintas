@@ -2600,3 +2600,11 @@ body {
   color: #d98a00;
   background: #fff6d8;
 }
+/* Videos verticales (filmados con el celular): recuadro angosto y centrado, sin franjas negras */
+.vid:has(.vid-view.vertical) {
+  max-width: 420px;
+  margin-inline: auto;
+}
+.vid-view.vertical video {
+  max-width: 100%;
+}
