@@ -905,6 +905,7 @@
           : 'La rayita de cada día muestra si el turno está libre.';
     }
     updBuybar();
+    setAmbiente(est ? 'noche' : 'dia');
     const hg = $('#hint-go');
     if (hg) hg.onclick = () => openStay(Q(), rng.a, rng.b);
     const hc = $('#hint-clear');
@@ -1146,6 +1147,14 @@
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) vidEl.pause();
   });
+
+  /* ======================= ambiente (día de verano / noche) ======================= */
+  /* Pasar el día → fondo amarillo de verano. Quedarse a dormir → modo noche. Panel y creador → neutro. */
+  function setAmbiente(a) {
+    const r = document.documentElement;
+    if (a) r.dataset.ambiente = a;
+    else delete r.dataset.ambiente;
+  }
 
   /* ======================= barra fija de reserva (página de la quinta) ======================= */
   /* Siempre a mano: muestra el precio y lleva a reservar. Se esconde cuando el calendario está en pantalla. */
@@ -1831,6 +1840,7 @@
     const est = $('#s-tipo').value === 'est';
     $('#sf-turno').hidden = est;
     $('#sf-noches').hidden = !est;
+    setAmbiente(est ? 'noche' : 'dia');
     $('#s-fecha-l').textContent = est ? '¿Qué día llegás?' : '¿Qué día?';
     $$('.mode [data-tipo]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tipo === (est ? 'est' : 'dia'))));
     const nN = +$('#s-noches').value || 2;
@@ -4594,6 +4604,20 @@
       $('#' + a.dataset.scroll).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
     }),
   );
+  let lastH = null;
+  /* Tocar "Buscar quinta" / "Cómo reservar" estando ya en esa dirección no dispara hashchange: lo resolvemos acá */
+  [
+    ['#nav-portal', ['', 'portal'], () => window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })],
+    ['#nav-como', ['como'], () => $('#como').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' })],
+    ['.brand', ['', 'portal'], () => window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })],
+  ].forEach(([sel, hs, fn]) =>
+    $(sel).addEventListener('click', e => {
+      if (hs.includes(location.hash.slice(1))) {
+        e.preventDefault();
+        fn();
+      }
+    }),
+  );
   function route() {
     const h = location.hash.slice(1);
     let view = 'portal';
@@ -4612,12 +4636,16 @@
       $('#buybar').hidden = true;
       document.body.classList.remove('has-bb');
     }
+    if (view === 'panel' || view === 'crear') setAmbiente('');
     if (view === 'portal') {
       document.title = 'NOVANTIQ Quintas · Alquilá tu quinta por fecha';
       initSearch();
       renderPortal();
       if (h === 'como') setTimeout(() => $('#como').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }), 60);
+      // Volver desde "Cómo reservar" (o desde el panel) al buscador: arriba de todo
+      else if (lastH === 'como' || lastH === 'panel' || lastH === 'crear') window.scrollTo(0, 0);
     }
+    lastH = h;
     if (view === 'quinta') {
       if (!selDate && !rng.a) mi = defaultMonth();
       renderQuinta();

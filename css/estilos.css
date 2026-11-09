@@ -2506,3 +2506,97 @@ footer.nq .wrap {
     scroll-margin-top: 12px;
   }
 }
+
+/* =========================================================
+   Ambiente según lo que busca el cliente
+   - Pasar el día: fondo amarillo de verano
+   - Quedarse a dormir: modo noche, azul oscuro con estrellas
+   Lo activa js/app.js con <html data-ambiente="dia|noche">
+   ========================================================= */
+body {
+  transition:
+    background-color 0.5s,
+    color 0.5s;
+}
+:root[data-ambiente='dia'] {
+  color-scheme: light;
+  --bg: #fff3c4;
+  --surface: #ffffff;
+  --surface-2: #fdeeb5;
+  --ink: #1f2a1f;
+  --muted: #6a5f3c;
+  --line: #f0dc98;
+  --accent: #e0562a;
+  --accent-ink: #ffffff;
+  --accent-soft: #ffe2cf;
+  --pool: #0f8aa6;
+  --free: #2f9a5f;
+  --free-bg: #dcf1e2;
+  --free-ink: #1d6b40;
+  --taken: #d9cfa8;
+  --shadow: 0 1px 2px rgba(120, 90, 10, 0.08), 0 8px 24px rgba(160, 120, 20, 0.12);
+}
+:root[data-ambiente='dia'] body {
+  background:
+    radial-gradient(circle at 92% -8%, rgba(255, 205, 60, 0.55) 0, rgba(255, 205, 60, 0) 38%),
+    var(--bg);
+  background-attachment: fixed;
+}
+:root[data-ambiente='noche'] {
+  color-scheme: dark;
+  --bg: #0a1330;
+  --surface: #121d42;
+  --surface-2: #1a2856;
+  --ink: #eef2ff;
+  --muted: #a6b3d8;
+  --line: #2a3a6c;
+  --accent: #ff9a5a;
+  --accent-ink: #1a0d07;
+  --accent-soft: #3d2618;
+  --pool: #8cc8ff;
+  --leaf: #7cc49b;
+  --free: #5bd394;
+  --free-bg: #12382a;
+  --free-ink: #9be9bf;
+  --half-bg: #3a2e15;
+  --half: #e8b24c;
+  --taken: #34406a;
+  --pend: #e3a245;
+  --pend-bg: #3a2c14;
+  --pend-ink: #f2c47e;
+  --danger: #f07563;
+  --star: #ffd36a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+:root[data-ambiente='noche'] body {
+  background:
+    radial-gradient(circle at 88% 4%, rgba(255, 240, 200, 0.22) 0, rgba(255, 240, 200, 0) 16%),
+    radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 28% 8%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 46% 26%, #dfe7ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 78% 30%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 92% 20%, #dfe7ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 8% 44%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 36% 52%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 58% 64%, #dfe7ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 84% 58%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 20% 80%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 70% 88%, #fff 50%, transparent 51%),
+    linear-gradient(180deg, #08102a 0%, #0f1c46 100%);
+  background-attachment: fixed;
+}
+:root[data-ambiente='noche'] .demo-tag {
+  background: rgba(18, 29, 66, 0.92);
+  color: #dfe7ff;
+}
+:root[data-ambiente='noche'] .mode button[aria-pressed='true'] {
+  border-color: #ffd36a;
+  color: #ffd36a;
+  background: color-mix(in srgb, #ffd36a 10%, var(--surface));
+}
+:root[data-ambiente='dia'] .mode button[aria-pressed='true'] {
+  border-color: #f2a51a;
+  color: #d98a00;
+  background: #fff6d8;
+}
