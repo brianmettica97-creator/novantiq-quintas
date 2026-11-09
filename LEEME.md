@@ -14,12 +14,12 @@ Desarrollado por **Novantiq S.A.** · @novantiq.sa
 Para publicar cambios, desde la terminal de VS Code en esta carpeta:
 
 ```
-git add -A
-git commit -m "Qué cambiaste"
-git push
+powershell -ExecutionPolicy Bypass -File publicar.ps1 "Qué cambiaste"
 ```
 
-GitHub Pages actualiza la web sola en 1 o 2 minutos.
+Sube todo a GitHub y además actualiza la versión de `estilos.css` y `app.js` en `index.html`, para que los navegadores bajen los archivos nuevos en vez de usar los viejos guardados. GitHub Pages actualiza la web sola en 1 o 2 minutos.
+
+Si igual ves la versión vieja, recargá con **Ctrl + F5** (en el celular, cerrá y volvé a abrir la pestaña).
 
 ## Cómo abrirlo
 

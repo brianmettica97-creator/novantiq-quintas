@@ -2608,3 +2608,25 @@ body {
 .vid-view.vertical video {
   max-width: 100%;
 }
+/* Botón "▶ Ver video" sobre la galería (lleva al video de la quinta) */
+.gal-vid {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  background: #e0562a;
+  color: #fff;
+  border: 0;
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+#vid-title {
+  scroll-margin-top: 90px;
+}
+@media (max-width: 600px) {
+  #vid-title {
+    scroll-margin-top: 12px;
+  }
+}

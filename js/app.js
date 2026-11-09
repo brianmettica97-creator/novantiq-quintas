@@ -4423,6 +4423,7 @@
     $('#q-gal').innerHTML =
       `<div class="gal-track" id="gal-track">${galFotos.map((f, i) => `<button type="button" class="gal-item" data-lb="${i}" aria-label="Ver foto ${i + 1} de ${galFotos.length}: ${esc(f.cap || '')}"><img src="${f.src}" alt="${esc(f.cap || 'Foto de la quinta')}"${i ? ' loading="lazy"' : ''}></button>`).join('')}</div>
   <button type="button" class="gal-all" data-lb="0">Ver las ${galFotos.length} fotos</button>
+  ${(VIDEOS[q.id] || []).length ? '<button type="button" class="gal-vid" id="gal-vid">▶ Ver video</button>' : ''}
   <span class="gal-count" id="gal-count">1 / ${galFotos.length}</span>
   ${ill ? '<span class="gal-ill">Imágenes ilustrativas</span>' : ''}`;
     const tr = $('#gal-track');
@@ -4437,6 +4438,10 @@
     );
   }
   $('#q-gal').addEventListener('click', e => {
+    if (e.target.closest('#gal-vid')) {
+      $('#vid-title').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      return;
+    }
     const b = e.target.closest('[data-lb]');
     if (b) openLb(+b.dataset.lb);
   });
