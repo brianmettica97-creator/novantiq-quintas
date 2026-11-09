@@ -6,6 +6,21 @@ Desarrollado por **Novantiq S.A.** · @novantiq.sa
 
 ---
 
+## Dónde está publicada
+
+- **Web:** https://brianmettica97-creator.github.io/novantiq-quintas/
+- **Código:** https://github.com/brianmettica97-creator/novantiq-quintas
+
+Para publicar cambios, desde la terminal de VS Code en esta carpeta:
+
+```
+git add -A
+git commit -m "Qué cambiaste"
+git push
+```
+
+GitHub Pages actualiza la web sola en 1 o 2 minutos.
+
 ## Cómo abrirlo
 
 1. Descomprimí el .zip y abrí la carpeta `novantiq-quintas` en Visual Studio Code (Archivo → Abrir carpeta).
